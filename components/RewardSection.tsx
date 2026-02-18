@@ -22,7 +22,7 @@ const RewardSection: React.FC = () => {
   ];
 
   return (
-    <section className="bg-[#0b101d] py-20 relative">
+    <section id="withdraw" className="bg-[#0b101d] py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <FadeIn direction="down">
@@ -31,9 +31,14 @@ const RewardSection: React.FC = () => {
             </h2>
           </FadeIn>
           <FadeIn direction="up" delay={100}>
-            <p className="text-gray-400 max-w-3xl mx-auto leading-relaxed text-lg">
+            <p className="text-gray-400 max-w-3xl mx-auto leading-relaxed text-lg mb-6">
               From PayPal and gift cards to crypto, EarnLeaf offers a wide range of withdrawal options. Select the method that works best for you and enjoy your earnings with ease.
             </p>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-6 px-6 py-3 rounded-full bg-primary-500/5 border border-primary-500/20 text-primary-300 text-sm font-medium">
+              <span>Exchange Rate: 1,000 Coins = $1.00</span>
+              <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-primary-500/40"></span>
+              <span className="text-emerald-400">Minimum Withdrawal: $5.00</span>
+            </div>
           </FadeIn>
         </div>
 

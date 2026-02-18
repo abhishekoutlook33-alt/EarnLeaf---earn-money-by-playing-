@@ -7,6 +7,8 @@ interface Props {
 }
 
 const OfferCard: React.FC<Props> = ({ offer }) => {
+  const usdValue = (offer.reward / 1000).toFixed(2);
+
   return (
     <div className="group relative h-full bg-background-lighter rounded-2xl border border-gray-800/60 overflow-hidden transition-all duration-300 hover:border-primary-500/50 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.2)] hover:-translate-y-2">
       {/* Hover Gradient Overlay */}
@@ -48,9 +50,14 @@ const OfferCard: React.FC<Props> = ({ offer }) => {
 
         {/* Action / Reward */}
         <div className="flex items-center justify-between mt-auto">
-           <div className="flex items-center gap-1.5 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20 group-hover:bg-emerald-500/20 transition-colors">
-             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-             <span className="text-xs sm:text-sm font-bold text-emerald-400">+{offer.reward}</span>
+           <div className="flex flex-col items-start gap-0.5">
+             <div className="flex items-center gap-1.5 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20 group-hover:bg-emerald-500/20 transition-colors">
+               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+               <span className="text-xs sm:text-sm font-bold text-emerald-400">+{offer.reward}</span>
+             </div>
+             <span className="text-[10px] text-gray-500 ml-1 font-medium">
+               ≈ ${usdValue}
+             </span>
            </div>
            
            <button className="bg-white text-black hover:bg-primary-500 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all transform group-hover:scale-105 active:scale-95 shadow-lg shadow-white/10 group-hover:shadow-primary-500/20">

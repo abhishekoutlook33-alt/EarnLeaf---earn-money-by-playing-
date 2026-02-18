@@ -14,6 +14,9 @@ const Header: React.FC<Props> = ({ onOpenChat }) => {
     }
   };
 
+  const balance = 2450;
+  const usdBalance = (balance / 1000).toFixed(2);
+
   return (
     <header className="fixed top-0 left-0 right-0 h-14 lg:h-16 bg-background/95 backdrop-blur-md border-b border-gray-800/40 z-50">
       <div className="max-w-[2000px] mx-auto px-4 lg:px-6 h-full flex items-center justify-between">
@@ -53,8 +56,8 @@ const Header: React.FC<Props> = ({ onOpenChat }) => {
               </a>
             ))}
             
-            <a href="#rewards" className="flex items-center space-x-2 text-sm font-medium transition-all text-amber-400 hover:text-amber-300 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 rounded-full border border-amber-500/20">
-              <Star className="w-4 h-4 fill-amber-500/20" />
+            <a href="#rewards" className="flex items-center space-x-2 text-sm font-medium transition-all text-primary-400 hover:text-primary-300 px-3 py-1.5 bg-primary-500/10 hover:bg-primary-500/20 rounded-full border border-primary-500/20">
+              <Star className="w-4 h-4 text-primary-400 fill-primary-500/20" />
               <span>Rewards</span>
             </a>
           </div>
@@ -63,16 +66,21 @@ const Header: React.FC<Props> = ({ onOpenChat }) => {
         {/* User Stats / Profile */}
         <div className="flex items-center space-x-2 sm:space-x-4">
           <a href="#rewards" className="md:hidden flex items-center gap-1.5 px-2.5 py-1 bg-primary-500/10 rounded-full border border-primary-500/20">
-             <Star className="w-3.5 h-3.5 text-primary-500 fill-current" />
-             <span className="text-xs font-bold text-primary-500">Rewards</span>
+             <Star className="w-3.5 h-3.5 text-primary-400 fill-current" />
+             <span className="text-xs font-bold text-primary-400">Rewards</span>
           </a>
           
           <div className="flex items-center gap-2 sm:gap-3 pl-2 sm:pl-4 border-l border-gray-800">
              <div className="text-right">
                 <div className="text-xs text-gray-400">Balance</div>
-                <div className="text-sm font-bold text-emerald-400 flex items-center justify-end gap-1">
-                   <span>2,450</span>
-                   <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                <div className="flex flex-col items-end">
+                  <div className="text-sm font-bold text-primary-400 flex items-center justify-end gap-1">
+                     <span>{balance.toLocaleString()}</span>
+                     <div className="w-2 h-2 rounded-full bg-primary-400"></div>
+                  </div>
+                  <div className="text-[10px] text-gray-500 font-medium tracking-wide">
+                    ${usdBalance}
+                  </div>
                 </div>
              </div>
           </div>
