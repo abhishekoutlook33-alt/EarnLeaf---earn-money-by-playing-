@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type Category = 'All' | 'Surveys' | 'OfferWalls';
 
 export interface Offer {

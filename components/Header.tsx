@@ -4,14 +4,42 @@ import { Star } from 'lucide-react';
 
 interface Props {
   onOpenChat: () => void;
+  currentView: string;
+  onNavigate: (view: string) => void;
 }
 
-const Header: React.FC<Props> = ({ onOpenChat }) => {
-  const handleNavClick = (e: React.MouseEvent, itemLabel: string) => {
+const Header: React.FC<Props> = ({ onOpenChat, currentView, onNavigate }) => {
+  const handleNavClick = (e: React.MouseEvent, itemLabel: string, href: string) => {
+    e.preventDefault();
     if (itemLabel === 'Live Chat') {
-      e.preventDefault();
       onOpenChat();
+      return;
     }
+    
+    // Map labels to views
+    let view = 'home';
+    if (itemLabel === 'Withdraw') view = 'withdraw';
+    if (itemLabel === 'Leaderboard') view = 'leaderboard';
+    if (itemLabel === 'Affiliates') view = 'affiliates';
+    
+    onNavigate(view);
+    
+    // Handle hash scroll for Earn
+    if (itemLabel === 'Earn') {
+        window.location.hash = 'earn';
+        // If we are already on home, we might need to scroll manually if the hash didn't trigger it
+        const element = document.getElementById('earn');
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        // Clear hash for other pages
+        history.pushState("", document.title, window.location.pathname + window.location.search);
+    }
+  };
+
+  const isActive = (label: string) => {
+    if (label === 'Earn' && currentView === 'home') return true;
+    if (label.toLowerCase() === currentView) return true;
+    return false;
   };
 
   const balance = 2450;
@@ -22,7 +50,11 @@ const Header: React.FC<Props> = ({ onOpenChat }) => {
       <div className="max-w-[2000px] mx-auto px-4 lg:px-6 h-full flex items-center justify-between">
         {/* Logo Area */}
         <nav className="flex items-center">
-          <a href="/" className="flex items-center space-x-2 mr-4 lg:mr-8 group">
+          <a 
+            href="/" 
+            onClick={(e) => { e.preventDefault(); onNavigate('home'); }}
+            className="flex items-center space-x-2 mr-4 lg:mr-8 group"
+          >
             <div className="relative w-8 h-8 sm:w-10 sm:h-10">
                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-primary-500 fill-primary-500/20 group-hover:scale-110 transition-transform duration-300">
                   <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-2.5-3-2.5-3S6 10.62 6 12a2.5 2.5 0 0 0 2.5 2.5Z" />
@@ -42,22 +74,26 @@ const Header: React.FC<Props> = ({ onOpenChat }) => {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.label)}
+                onClick={(e) => handleNavClick(e, item.label, item.href)}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200
-                  ${item.label === 'Earn' 
+                  ${isActive(item.label)
                     ? 'text-primary-400 bg-primary-500/10 hover:bg-primary-500/20' 
                     : item.label === 'Live Chat'
                       ? 'text-primary-300 hover:text-white hover:bg-white/5 hover:text-primary-400'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
               >
-                <item.icon className={`w-4 h-4 ${item.label === 'Earn' || item.label === 'Live Chat' ? 'text-primary-500' : ''}`} />
+                <item.icon className={`w-4 h-4 ${isActive(item.label) || item.label === 'Live Chat' ? 'text-primary-500' : ''}`} />
                 <span>{item.label}</span>
               </a>
             ))}
             
-            <a href="#rewards" className="flex items-center space-x-2 text-sm font-medium transition-all text-primary-400 hover:text-primary-300 px-3 py-1.5 bg-primary-500/10 hover:bg-primary-500/20 rounded-full border border-primary-500/20">
-              <Star className="w-4 h-4 text-primary-400 fill-primary-500/20" />
+            <a 
+                href="#withdraw" 
+                onClick={(e) => { e.preventDefault(); onNavigate('withdraw'); }}
+                className={`flex items-center space-x-2 text-sm font-medium transition-all px-3 py-1.5 rounded-full border border-primary-500/20 ${currentView === 'withdraw' ? 'bg-primary-500 text-white' : 'text-primary-400 hover:text-primary-300 bg-primary-500/10 hover:bg-primary-500/20'}`}
+            >
+              <Star className={`w-4 h-4 ${currentView === 'withdraw' ? 'text-white fill-white' : 'text-primary-400 fill-primary-500/20'}`} />
               <span>Rewards</span>
             </a>
           </div>
@@ -65,7 +101,11 @@ const Header: React.FC<Props> = ({ onOpenChat }) => {
 
         {/* User Stats / Profile */}
         <div className="flex items-center space-x-2 sm:space-x-4">
-          <a href="#rewards" className="md:hidden flex items-center gap-1.5 px-2.5 py-1 bg-primary-500/10 rounded-full border border-primary-500/20">
+          <a 
+            href="#withdraw" 
+            onClick={(e) => { e.preventDefault(); onNavigate('withdraw'); }}
+            className="md:hidden flex items-center gap-1.5 px-2.5 py-1 bg-primary-500/10 rounded-full border border-primary-500/20"
+          >
              <Star className="w-3.5 h-3.5 text-primary-400 fill-current" />
              <span className="text-xs font-bold text-primary-400">Rewards</span>
           </a>
