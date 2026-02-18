@@ -20,10 +20,10 @@ const Footer: React.FC = () => {
             </a>
             
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-background-lighter border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary-600 hover:border-primary-500 transition-all duration-300">
+              <a href="https://twitter.com/Abhishekkevat33" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-background-lighter border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary-600 hover:border-primary-500 transition-all duration-300">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-background-lighter border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#229ED9] hover:border-[#229ED9] transition-all duration-300">
+              <a href="https://t.me/+i5aHr2GG-mQ3MmI1" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-background-lighter border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#229ED9] hover:border-[#229ED9] transition-all duration-300">
                 <Send className="w-5 h-5 ml-0.5" />
               </a>
             </div>
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
               <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Support</h3>
               <ul className="space-y-2 sm:space-y-3">
                 <li><a href="#" className="text-sm text-gray-400 hover:text-primary-400 transition-colors">Help Center</a></li>
-                <li><a href="#" className="text-sm text-gray-400 hover:text-primary-400 transition-colors">Contact Us</a></li>
+                <li><a href="https://t.me/ABHISHEK_KEVAT" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-primary-400 transition-colors">Contact Us</a></li>
                 <li><a href="#" className="text-sm text-gray-400 hover:text-primary-400 transition-colors">Terms of Service</a></li>
                 <li><a href="#" className="text-sm text-gray-400 hover:text-primary-400 transition-colors">Privacy Policy</a></li>
               </ul>

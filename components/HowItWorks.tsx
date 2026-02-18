@@ -42,9 +42,9 @@ const HowItWorks: React.FC = () => {
                     <div className="aspect-square rounded-xl overflow-hidden mb-3 bg-[#3b82f6] relative">
                          <div className="absolute inset-0 flex items-center justify-center">
                             <img 
-                                src="https://api.dicebear.com/9.x/avataaars/svg?seed=Felix&backgroundColor=transparent" 
-                                className="w-full h-full transform scale-125 translate-y-3" 
-                                alt="Character"
+                                src="https://play-lh.googleusercontent.com/c4sJ6g4g7h8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5a6b7c8d9e0f1g2h3i4j" 
+                                className="w-full h-full object-cover" 
+                                alt="Dice Dreams"
                             />
                          </div>
                     </div>
@@ -99,7 +99,7 @@ const HowItWorks: React.FC = () => {
               <div className="relative w-full max-w-sm bg-gradient-to-b from-[#1a1f2e] to-[#0f1219] border border-gray-800 rounded-[2rem] p-6 sm:p-8 shadow-2xl">
                  <div className="flex flex-col items-center">
                     <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-[2rem] bg-[#3b82f6] shadow-2xl mb-6 overflow-hidden relative border-4 border-[#1a1f2e]">
-                        <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Felix&backgroundColor=transparent" className="w-full h-full transform scale-125 translate-y-4" alt="Character"/>
+                        <img src="https://play-lh.googleusercontent.com/c4sJ6g4g7h8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5a6b7c8d9e0f1g2h3i4j" className="w-full h-full object-cover" alt="Dice Dreams"/>
                     </div>
                     
                     <h3 className="text-2xl font-bold text-white mb-2">Dice Dreams</h3>
