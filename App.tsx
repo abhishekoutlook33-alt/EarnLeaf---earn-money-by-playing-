@@ -15,6 +15,7 @@ import { FileText, Target } from 'lucide-react';
 
 const App: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const filteredOffers = useMemo(() => {
     if (activeCategory === 'All') return OFFERS;
@@ -22,11 +23,15 @@ const App: React.FC = () => {
   }, [activeCategory]);
 
   const surveyOffers = filteredOffers.filter(o => o.type === 'Surveys');
-  const gameOffers = filteredOffers.filter(o => o.type === 'Games');
+  const offerWallOffers = filteredOffers.filter(o => o.type === 'OfferWalls');
+
+  const handleOpenChat = () => {
+    setIsChatOpen(true);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background font-sans selection:bg-primary-500/30">
-      <Header />
+      <Header onOpenChat={handleOpenChat} />
       
       <main className="flex-1 w-full pb-20 md:pb-0">
         
@@ -61,14 +66,14 @@ const App: React.FC = () => {
                    />
                 )}
 
-                {/* Games Section */}
-                {(activeCategory === 'All' || activeCategory === 'Games') && (
+                {/* OfferWalls Section (formerly Games) */}
+                {(activeCategory === 'All' || activeCategory === 'OfferWalls') && (
                    <Section 
-                     title="Games" 
-                     subtitle="Play trending games to get massive rewards!" 
+                     title="OfferWalls" 
+                     subtitle="Complete offers, install apps, and play games to earn rewards!" 
                      icon={<Target className="w-5 h-5 text-white" />} 
                      iconBgColor="bg-emerald-500"
-                     offers={gameOffers}
+                     offers={offerWallOffers}
                    />
                 )}
 
@@ -88,10 +93,10 @@ const App: React.FC = () => {
       </main>
 
       {/* Live Chat Widget */}
-      <ChatWidget />
+      <ChatWidget isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
 
       <Footer />
-      <MobileNav />
+      <MobileNav onOpenChat={handleOpenChat} />
     </div>
   );
 };

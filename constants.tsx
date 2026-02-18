@@ -1,4 +1,4 @@
-import { LayoutGrid, FileText, Target, Gift, Wallet, Trophy, Users, Star } from 'lucide-react';
+import { LayoutGrid, FileText, Target, Gift, Wallet, Trophy, Users, Star, MessageCircle } from 'lucide-react';
 import { Offer, NavItem, LiveFeedItem } from './types';
 
 export const NAV_ITEMS: NavItem[] = [
@@ -6,6 +6,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Withdraw', href: '#withdraw', icon: Wallet },
   { label: 'Leaderboard', href: '#leaderboard', icon: Trophy },
   { label: 'Affiliates', href: '#affiliates', icon: Users },
+  { label: 'Live Chat', href: '#chat', icon: MessageCircle },
 ];
 
 export const OFFERS: Offer[] = [
@@ -48,7 +49,7 @@ export const OFFERS: Offer[] = [
     rating: 4.7,
     type: 'Surveys'
   },
-  // Games
+  // OfferWalls (formerly Games)
   {
     id: 'g1',
     title: 'Raid: Shadow Legends',
@@ -56,7 +57,7 @@ export const OFFERS: Offer[] = [
     reward: 15000,
     image: 'https://picsum.photos/seed/game1/300/200',
     rating: 4.9,
-    type: 'Games',
+    type: 'OfferWalls',
     tags: ['RPG', 'Install']
   },
   {
@@ -66,7 +67,7 @@ export const OFFERS: Offer[] = [
     reward: 8500,
     image: 'https://picsum.photos/seed/game2/300/200',
     rating: 4.6,
-    type: 'Games',
+    type: 'OfferWalls',
     tags: ['Casual']
   },
   {
@@ -76,7 +77,7 @@ export const OFFERS: Offer[] = [
     reward: 12400,
     image: 'https://picsum.photos/seed/game3/300/200',
     rating: 4.3,
-    type: 'Games'
+    type: 'OfferWalls'
   },
   {
     id: 'g4',
@@ -85,7 +86,7 @@ export const OFFERS: Offer[] = [
     reward: 500,
     image: 'https://picsum.photos/seed/game4/300/200',
     rating: 4.5,
-    type: 'Games'
+    type: 'OfferWalls'
   },
 ];
 

@@ -11,7 +11,7 @@ const CategoryFilter: React.FC<Props> = ({ activeCategory, setCategory }) => {
   const tabs: { id: Category; icon: any; label: string }[] = [
     { id: 'All', icon: LayoutGrid, label: 'All' },
     { id: 'Surveys', icon: FileText, label: 'Surveys' },
-    { id: 'Games', icon: Target, label: 'Games' },
+    { id: 'OfferWalls', icon: Target, label: 'OfferWalls' },
   ];
 
   return (

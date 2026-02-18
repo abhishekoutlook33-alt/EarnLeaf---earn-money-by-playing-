@@ -9,8 +9,12 @@ interface Message {
   isSystem?: boolean;
 }
 
-const ChatWidget: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface Props {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
+
+const ChatWidget: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   const [messages, setMessages] = useState<Message[]>([
     { id: '1', user: 'System', text: 'Welcome to the global chat!', avatar: '', isSystem: true },
     { id: '2', user: 'Alex99', text: 'Anyone got the survey reward yet?', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex' },
@@ -26,7 +30,9 @@ const ChatWidget: React.FC = () => {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    if (isOpen) {
+      setTimeout(scrollToBottom, 100);
+    }
   }, [messages, isOpen]);
 
   const handleSend = (e: React.FormEvent) => {

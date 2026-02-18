@@ -2,7 +2,18 @@ import React from 'react';
 import { NAV_ITEMS } from '../constants';
 import { Star } from 'lucide-react';
 
-const Header: React.FC = () => {
+interface Props {
+  onOpenChat: () => void;
+}
+
+const Header: React.FC<Props> = ({ onOpenChat }) => {
+  const handleNavClick = (e: React.MouseEvent, itemLabel: string) => {
+    if (itemLabel === 'Live Chat') {
+      e.preventDefault();
+      onOpenChat();
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 h-14 lg:h-16 bg-background/95 backdrop-blur-md border-b border-gray-800/40 z-50">
       <div className="max-w-[2000px] mx-auto px-4 lg:px-6 h-full flex items-center justify-between">
@@ -28,13 +39,16 @@ const Header: React.FC = () => {
               <a
                 key={item.label}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.label)}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200
                   ${item.label === 'Earn' 
                     ? 'text-primary-400 bg-primary-500/10 hover:bg-primary-500/20' 
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    : item.label === 'Live Chat'
+                      ? 'text-primary-300 hover:text-white hover:bg-white/5 hover:text-primary-400'
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
               >
-                <item.icon className={`w-4 h-4 ${item.label === 'Earn' ? 'text-primary-500' : ''}`} />
+                <item.icon className={`w-4 h-4 ${item.label === 'Earn' || item.label === 'Live Chat' ? 'text-primary-500' : ''}`} />
                 <span>{item.label}</span>
               </a>
             ))}
@@ -54,18 +68,13 @@ const Header: React.FC = () => {
           </a>
           
           <div className="flex items-center gap-2 sm:gap-3 pl-2 sm:pl-4 border-l border-gray-800">
-             <div className="text-right hidden sm:block">
+             <div className="text-right">
                 <div className="text-xs text-gray-400">Balance</div>
                 <div className="text-sm font-bold text-emerald-400 flex items-center justify-end gap-1">
                    <span>2,450</span>
                    <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
                 </div>
              </div>
-             {/* Mobile Balance only icon/dots if needed, but keeping avatar mostly */}
-             <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background-lighter border border-gray-700 hover:border-gray-500 overflow-hidden transition-colors relative group">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=User123" alt="Profile" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-             </button>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import OfferCard from './OfferCard';
 import { Offer } from '../types';
+import FadeIn from './FadeIn';
 
 interface Props {
   title: string;
@@ -15,31 +16,35 @@ const Section: React.FC<Props> = ({ title, subtitle, icon, iconBgColor, offers }
   if (offers.length === 0) return null;
 
   return (
-    <section className="animate-appear">
-      <div className="pb-4 sm:pb-6 flex items-end justify-between">
-        <div>
-          <div className="flex items-center gap-3">
-            <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl ${iconBgColor} flex items-center justify-center shadow-lg`}>
-              {icon}
+    <section className="space-y-6">
+      <FadeIn direction="left" delay={0}>
+        <div className="flex items-end justify-between">
+          <div>
+            <div className="flex items-center gap-3">
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl ${iconBgColor} flex items-center justify-center shadow-lg shadow-black/20 transform transition-transform hover:rotate-6`}>
+                {icon}
+              </div>
+              <div className="font-bold text-2xl sm:text-3xl text-white tracking-tight">
+                {title}
+              </div>
             </div>
-            <div className="font-bold text-xl sm:text-2xl text-white">
-              {title}
-            </div>
+            <p className="text-sm sm:text-base font-medium text-slate-400 mt-2 ml-1">
+              {subtitle}
+            </p>
           </div>
-          <p className="text-sm sm:text-base font-medium text-slate-400 mt-1 ml-1 line-clamp-1 sm:line-clamp-none">
-            {subtitle}
-          </p>
+          
+          <button className="hidden sm:flex items-center text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors group px-4 py-2 rounded-lg hover:bg-white/5">
+            View All
+            <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
-        
-        <button className="hidden sm:flex items-center text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors group">
-          View All
-          <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-        </button>
-      </div>
+      </FadeIn>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
-        {offers.map((offer) => (
-          <OfferCard key={offer.id} offer={offer} />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+        {offers.map((offer, index) => (
+          <FadeIn key={offer.id} delay={index * 100} fullWidth>
+            <OfferCard offer={offer} />
+          </FadeIn>
         ))}
       </div>
     </section>

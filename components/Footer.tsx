@@ -66,8 +66,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-gray-800/50 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-          <p className="text-sm text-gray-600">© 2024 EarnLeaf. All rights reserved.</p>
-          <p className="text-xs text-gray-700">Not affiliated with Discord Inc.</p>
+          <p className="text-sm text-gray-600">© 2026 EarnLeaf. All rights reserved.</p>
         </div>
       </div>
     </footer>

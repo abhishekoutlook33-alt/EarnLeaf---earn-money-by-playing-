@@ -1,4 +1,4 @@
-export type Category = 'All' | 'Surveys' | 'Games';
+export type Category = 'All' | 'Surveys' | 'OfferWalls';
 
 export interface Offer {
   id: string;
