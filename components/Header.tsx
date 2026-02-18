@@ -42,9 +42,6 @@ const Header: React.FC<Props> = ({ onOpenChat, currentView, onNavigate }) => {
     return false;
   };
 
-  const balance = 2450;
-  const usdBalance = (balance / 1000).toFixed(2);
-
   return (
     <header className="fixed top-0 left-0 right-0 h-14 lg:h-16 bg-background/95 backdrop-blur-md border-b border-gray-800/40 z-50">
       <div className="max-w-[2000px] mx-auto px-4 lg:px-6 h-full flex items-center justify-between">
@@ -110,19 +107,12 @@ const Header: React.FC<Props> = ({ onOpenChat, currentView, onNavigate }) => {
              <span className="text-xs font-bold text-primary-400">Rewards</span>
           </a>
           
-          <div className="flex items-center gap-2 sm:gap-3 pl-2 sm:pl-4 border-l border-gray-800">
-             <div className="text-right">
-                <div className="text-xs text-gray-400">Balance</div>
-                <div className="flex flex-col items-end">
-                  <div className="text-sm font-bold text-primary-400 flex items-center justify-end gap-1">
-                     <span>{balance.toLocaleString()}</span>
-                     <div className="w-2 h-2 rounded-full bg-primary-400"></div>
-                  </div>
-                  <div className="text-[10px] text-gray-500 font-medium tracking-wide">
-                    ${usdBalance}
-                  </div>
-                </div>
-             </div>
+          <div className="pl-2 sm:pl-4 border-l border-gray-800">
+             <button 
+               className="bg-primary-600 hover:bg-primary-500 text-white text-xs sm:text-sm font-bold py-2 px-4 rounded-lg transition-colors shadow-lg shadow-primary-500/20"
+             >
+               Sign In
+             </button>
           </div>
         </div>
       </div>

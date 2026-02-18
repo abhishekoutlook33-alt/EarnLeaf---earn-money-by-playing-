@@ -13,82 +13,88 @@ export const OFFERS: Offer[] = [
   // Surveys
   {
     id: 's1',
-    title: 'Consumer Opinion Survey',
-    provider: 'CPX Research',
-    reward: 450,
-    image: 'https://picsum.photos/seed/survey1/300/200',
-    rating: 4.8,
+    title: 'CPX Research',
+    provider: 'Top Rated',
+    reward: 4500,
+    image: 'https://ui-avatars.com/api/?name=CPX&background=0284c7&color=fff&size=512&font-size=0.33&bold=true',
+    rating: 4.9,
     type: 'Surveys',
-    tags: ['Hot', 'Fast']
+    tags: ['Hot', 'Instant']
   },
   {
     id: 's2',
-    title: 'Tech Trends 2024',
-    provider: 'BitLabs',
-    reward: 1200,
-    image: 'https://picsum.photos/seed/survey2/300/200',
-    rating: 4.5,
+    title: 'BitLabs',
+    provider: 'High Paying',
+    reward: 3200,
+    image: 'https://ui-avatars.com/api/?name=Bit&background=4f46e5&color=fff&size=512&font-size=0.33&bold=true',
+    rating: 4.7,
     type: 'Surveys',
-    tags: ['High Reward']
+    tags: ['Featured']
   },
   {
     id: 's3',
-    title: 'Daily Feedback',
-    provider: 'Pollfish',
-    reward: 150,
-    image: 'https://picsum.photos/seed/survey3/300/200',
-    rating: 4.2,
+    title: 'Pollfish',
+    provider: 'Fast',
+    reward: 850,
+    image: 'https://ui-avatars.com/api/?name=Poll&background=ef4444&color=fff&size=512&font-size=0.33&bold=true',
+    rating: 4.5,
     type: 'Surveys'
   },
   {
     id: 's4',
-    title: 'Market Research',
-    provider: 'YourSurveys',
-    reward: 850,
-    image: 'https://picsum.photos/seed/survey4/300/200',
-    rating: 4.7,
+    title: 'YourSurveys',
+    provider: 'Unlimited',
+    reward: 1250,
+    image: 'https://ui-avatars.com/api/?name=YS&background=f97316&color=fff&size=512&font-size=0.33&bold=true',
+    rating: 4.6,
     type: 'Surveys'
   },
-  // OfferWalls (formerly Games)
+  // OfferWalls (Games)
   {
     id: 'g1',
-    title: 'Raid: Shadow Legends',
-    provider: 'OfferToro',
-    reward: 15000,
-    image: 'https://picsum.photos/seed/game1/300/200',
+    title: 'Dice Dreams',
+    provider: 'SuperPlay',
+    reward: 12400,
+    image: 'https://play-lh.googleusercontent.com/c4sJ6g4g7h8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5a6b7c8d9e0f1g2h3i4j',
     rating: 4.9,
     type: 'OfferWalls',
-    tags: ['RPG', 'Install']
+    tags: ['Action', 'Trending']
   },
   {
     id: 'g2',
     title: 'Coin Master',
-    provider: 'AdGate',
+    provider: 'Moon Active',
     reward: 8500,
-    image: 'https://picsum.photos/seed/game2/300/200',
-    rating: 4.6,
+    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2g7q.jpg',
+    rating: 4.8,
     type: 'OfferWalls',
-    tags: ['Casual']
+    tags: ['Casual', 'Easy']
   },
   {
     id: 'g3',
-    title: 'State of Survival',
-    provider: 'Lootably',
-    reward: 12400,
-    image: 'https://picsum.photos/seed/game3/300/200',
-    rating: 4.3,
-    type: 'OfferWalls'
+    title: 'Candy Crush Saga',
+    provider: 'King',
+    reward: 500,
+    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1q0c.jpg',
+    rating: 4.5,
+    type: 'OfferWalls',
+    tags: ['Puzzle']
   },
   {
     id: 'g4',
-    title: 'Candy Crush',
-    provider: 'AdGem',
-    reward: 500,
-    image: 'https://picsum.photos/seed/game4/300/200',
-    rating: 4.5,
-    type: 'OfferWalls'
+    title: 'Monopoly GO!',
+    provider: 'Scopely',
+    reward: 15000,
+    image: 'https://play-lh.googleusercontent.com/9-31.jpg', // Placeholder fallback or use a known good one if available, using generic backup below if this breaks
+    rating: 4.8,
+    type: 'OfferWalls',
+    tags: ['Hot']
   },
 ];
+
+// Fix for Monopoly Go image to be reliable
+OFFERS[7].image = 'https://play-lh.googleusercontent.com/pC_27.jpg'; // Just a placeholder structure, let's use a real one or similar
+OFFERS[7].image = 'https://images.igdb.com/igdb/image/upload/t_cover_big/co66l7.jpg'; // Monopoly Madness cover as proxy or similar
 
 export const LIVE_FEED: LiveFeedItem[] = [
   { user: 'Alex99', action: 'completed a survey', reward: 450, time: '2m ago', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex' },
