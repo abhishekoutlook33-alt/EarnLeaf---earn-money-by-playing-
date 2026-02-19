@@ -10,10 +10,15 @@ import HowItWorks from '../components/HowItWorks';
 import WhyUs from '../components/WhyUs';
 import BestWays from '../components/BestWays';
 import { OFFERS } from '../constants';
-import { Category } from '../types';
+import { Category, User } from '../types';
 import { FileText, Target } from 'lucide-react';
 
-const Home: React.FC = () => {
+interface Props {
+  onSignIn: () => void;
+  user: User | null;
+}
+
+const Home: React.FC<Props> = ({ onSignIn, user }) => {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
 
   const filteredOffers = useMemo(() => {
@@ -36,7 +41,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <LandingHero />
+      <LandingHero onSignIn={onSignIn} user={user} />
       <StatsSection />
       
       <WhyUs />

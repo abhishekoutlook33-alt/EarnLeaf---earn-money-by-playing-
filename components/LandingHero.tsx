@@ -1,8 +1,14 @@
 import React from 'react';
 import { Mail, ArrowRight, Gamepad2 } from 'lucide-react';
 import FadeIn from './FadeIn';
+import { User } from '../types';
 
-const LandingHero: React.FC = () => {
+interface Props {
+  onSignIn: () => void;
+  user: User | null;
+}
+
+const LandingHero: React.FC<Props> = ({ onSignIn, user }) => {
   return (
     <div className="relative w-full overflow-hidden bg-gradient-to-b from-purple-600 via-indigo-600 to-indigo-900 pt-24 pb-24 lg:pt-36 lg:pb-32">
       {/* Decorative Background Elements */}
@@ -34,12 +40,23 @@ const LandingHero: React.FC = () => {
 
             <FadeIn direction="up" delay={500}>
               <div className="pt-4 flex justify-center lg:justify-start">
-                  <button 
-                    className="bg-white text-purple-700 hover:bg-purple-50 font-bold py-4 px-10 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_35px_rgba(0,0,0,0.3)] transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2"
-                  >
-                    Get Started
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
+                  {!user ? (
+                    <button 
+                      onClick={onSignIn}
+                      className="bg-white text-purple-700 hover:bg-purple-50 font-bold py-4 px-10 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_35px_rgba(0,0,0,0.3)] transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2"
+                    >
+                      Get Started
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                  ) : (
+                    <a 
+                      href="#earn"
+                      className="bg-emerald-400 text-emerald-950 hover:bg-emerald-300 font-bold py-4 px-10 rounded-full shadow-[0_10px_25px_rgba(16,185,129,0.2)] hover:shadow-[0_20px_35px_rgba(16,185,129,0.3)] transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2"
+                    >
+                      Start Earning
+                      <ArrowRight className="w-5 h-5" />
+                    </a>
+                  )}
               </div>
             </FadeIn>
           </div>
@@ -48,48 +65,64 @@ const LandingHero: React.FC = () => {
           <div className="flex justify-center lg:justify-end">
              <FadeIn direction="right" delay={200} className="w-full max-w-md">
                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl hover:shadow-purple-500/10 transition-shadow duration-500">
-                  <div className="mb-6">
-                    <h2 className="text-2xl font-bold text-white mb-2">Get Started!</h2>
-                    <p className="text-purple-100 text-sm">It's free! Sign up and start to earn money!</p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="relative group">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-200 group-focus-within:text-white transition-colors" />
-                        <input 
-                          type="email" 
-                          placeholder="Email Address" 
-                          className="w-full bg-indigo-950/40 border border-purple-300/30 rounded-xl py-3.5 pl-10 pr-4 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-indigo-950/60 transition-all"
-                        />
+                  {user ? (
+                    <div className="text-center py-10">
+                       {user.photoURL && (
+                           <img src={user.photoURL} className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white/20" alt="Profile" />
+                       )}
+                       <h2 className="text-2xl font-bold text-white mb-2">Welcome back!</h2>
+                       <p className="text-purple-100 mb-6">Ready to make some money?</p>
+                       <a href="#earn" className="inline-block w-full bg-emerald-400 hover:bg-emerald-500 text-emerald-950 font-bold py-3.5 rounded-xl shadow-lg transition-all transform hover:-translate-y-1 active:scale-95">
+                         Go to Dashboard
+                       </a>
                     </div>
-                    
-                    <button className="w-full bg-emerald-400 hover:bg-emerald-500 text-emerald-950 font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-900/20 transition-all transform hover:-translate-y-1 hover:shadow-emerald-500/20 active:scale-95">
-                      Start Earning Now
-                    </button>
+                  ) : (
+                    <>
+                      <div className="mb-6">
+                        <h2 className="text-2xl font-bold text-white mb-2">Get Started!</h2>
+                        <p className="text-purple-100 text-sm">It's free! Sign up and start to earn money!</p>
+                      </div>
 
-                    <div className="relative flex py-2 items-center">
-                        <div className="flex-grow border-t border-white/20"></div>
-                        <span className="flex-shrink-0 mx-4 text-purple-200 text-sm">or</span>
-                        <div className="flex-grow border-t border-white/20"></div>
-                    </div>
+                      <div className="space-y-4">
+                        <div className="relative group">
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-200 group-focus-within:text-white transition-colors" />
+                            <input 
+                              type="email" 
+                              placeholder="Email Address" 
+                              className="w-full bg-indigo-950/40 border border-purple-300/30 rounded-xl py-3.5 pl-10 pr-4 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-indigo-950/60 transition-all"
+                            />
+                        </div>
+                        
+                        <button className="w-full bg-emerald-400 hover:bg-emerald-500 text-emerald-950 font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-900/20 transition-all transform hover:-translate-y-1 hover:shadow-emerald-500/20 active:scale-95">
+                          Start Earning Now
+                        </button>
 
-                    <div className="space-y-3">
-                        <button 
-                          className="w-full bg-white text-gray-700 font-semibold py-2.5 rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 transform active:scale-95"
-                        >
-                          <svg className="w-5 h-5" viewBox="0 0 24 24"><path fill="currentColor" d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/></svg>
-                          Sign up via Google
-                        </button>
-                        <button className="w-full bg-[#1877F2] text-white font-semibold py-2.5 rounded-xl hover:bg-[#166fe5] transition-colors flex items-center justify-center gap-2 transform active:scale-95">
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v2.225l-1.501.021c-1.97 0-2.3.006-2.3 2.239v2.775h4.92l-.642 3.667h-4.278v7.98H9.101Z"/></svg>
-                          Sign up via Facebook
-                        </button>
-                        <button className="w-full bg-[#171a21] text-white font-semibold py-2.5 rounded-xl hover:bg-[#2a2e38] transition-colors flex items-center justify-center gap-2 transform active:scale-95">
-                          <Gamepad2 className="w-5 h-5" />
-                          Sign up via Steam
-                        </button>
-                    </div>
-                  </div>
+                        <div className="relative flex py-2 items-center">
+                            <div className="flex-grow border-t border-white/20"></div>
+                            <span className="flex-shrink-0 mx-4 text-purple-200 text-sm">or</span>
+                            <div className="flex-grow border-t border-white/20"></div>
+                        </div>
+
+                        <div className="space-y-3">
+                            <button 
+                              onClick={onSignIn}
+                              className="w-full bg-white text-gray-700 font-semibold py-2.5 rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 transform active:scale-95"
+                            >
+                              <svg className="w-5 h-5" viewBox="0 0 24 24"><path fill="currentColor" d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/></svg>
+                              Sign up via Google
+                            </button>
+                            <button className="w-full bg-[#1877F2] text-white font-semibold py-2.5 rounded-xl hover:bg-[#166fe5] transition-colors flex items-center justify-center gap-2 transform active:scale-95">
+                              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v2.225l-1.501.021c-1.97 0-2.3.006-2.3 2.239v2.775h4.92l-.642 3.667h-4.278v7.98H9.101Z"/></svg>
+                              Sign up via Facebook
+                            </button>
+                            <button className="w-full bg-[#171a21] text-white font-semibold py-2.5 rounded-xl hover:bg-[#2a2e38] transition-colors flex items-center justify-center gap-2 transform active:scale-95">
+                              <Gamepad2 className="w-5 h-5" />
+                              Sign up via Steam
+                            </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
                </div>
              </FadeIn>
           </div>

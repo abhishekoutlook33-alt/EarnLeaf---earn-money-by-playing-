@@ -1,14 +1,18 @@
 import React from 'react';
 import { NAV_ITEMS } from '../constants';
-import { Star } from 'lucide-react';
+import { Star, LogOut, User as UserIcon } from 'lucide-react';
+import { User } from '../types';
 
 interface Props {
   onOpenChat: () => void;
   currentView: string;
   onNavigate: (view: string) => void;
+  user: User | null;
+  onSignIn: () => void;
+  onSignOut: () => void;
 }
 
-const Header: React.FC<Props> = ({ onOpenChat, currentView, onNavigate }) => {
+const Header: React.FC<Props> = ({ onOpenChat, currentView, onNavigate, user, onSignIn, onSignOut }) => {
   const handleNavClick = (e: React.MouseEvent, itemLabel: string, href: string) => {
     e.preventDefault();
     if (itemLabel === 'Live Chat') {
@@ -41,6 +45,10 @@ const Header: React.FC<Props> = ({ onOpenChat, currentView, onNavigate }) => {
     if (label.toLowerCase() === currentView) return true;
     return false;
   };
+
+  // Mock balance for display until Firestore is integrated
+  const balance = 2450;
+  const usdBalance = (balance / 1000).toFixed(2);
 
   return (
     <header className="fixed top-0 left-0 right-0 h-14 lg:h-16 bg-background/95 backdrop-blur-md border-b border-gray-800/40 z-50">
@@ -108,11 +116,44 @@ const Header: React.FC<Props> = ({ onOpenChat, currentView, onNavigate }) => {
           </a>
           
           <div className="pl-2 sm:pl-4 border-l border-gray-800">
-             <button 
-               className="bg-primary-600 hover:bg-primary-500 text-white text-xs sm:text-sm font-bold py-2 px-4 rounded-lg transition-colors shadow-lg shadow-primary-500/20"
-             >
-               Sign In
-             </button>
+             {user ? (
+               <div className="flex items-center gap-3">
+                 <div className="hidden sm:block text-right">
+                    <div className="text-xs text-gray-400">Balance</div>
+                    <div className="flex flex-col items-end">
+                      <div className="text-sm font-bold text-primary-400 flex items-center justify-end gap-1">
+                         <span>{balance.toLocaleString()}</span>
+                         <div className="w-2 h-2 rounded-full bg-primary-400"></div>
+                      </div>
+                      <div className="text-[10px] text-gray-500 font-medium tracking-wide">
+                        ${usdBalance}
+                      </div>
+                    </div>
+                 </div>
+                 
+                 <div className="relative group cursor-pointer" onClick={onSignOut}>
+                    {user.photoURL ? (
+                        <img src={user.photoURL} alt={user.displayName || "User"} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-gray-700 hover:border-primary-500 transition-colors" />
+                    ) : (
+                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary-600/20 flex items-center justify-center border border-gray-700 text-primary-400">
+                           <UserIcon className="w-5 h-5" />
+                        </div>
+                    )}
+                    <div className="absolute top-full right-0 mt-2 w-32 bg-gray-900 border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <button onClick={onSignOut} className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-white/5 flex items-center gap-2">
+                            <LogOut className="w-3 h-3" /> Sign Out
+                        </button>
+                    </div>
+                 </div>
+               </div>
+             ) : (
+                <button 
+                  onClick={onSignIn}
+                  className="bg-primary-600 hover:bg-primary-500 text-white text-xs sm:text-sm font-bold py-2 px-4 rounded-lg transition-colors shadow-lg shadow-primary-500/20"
+                >
+                  Sign In
+                </button>
+             )}
           </div>
         </div>
       </div>
